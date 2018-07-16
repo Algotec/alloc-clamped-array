@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Allocate Clamped Array</title>
+</head>
+<body>
+    <h1>
+        Demonstrate how clamped array allocation works slower in Chrome than in other browsers.
+    </h1>
+    <button id="run">Run Test</button>
+    <br/>
+    <span id="result"></span>
+</body>
+<script>
+    document.getElementById("run").onclick = function () {
+    	var cache = [];
+	    var startTime = performance.now();
+	    for (var i = 0; i < 1000; i++) {
+		    cache[i] = new Uint8ClampedArray(1024 * 1024);
+	    }
+	    var endTime = performance.now();
+	    var diffTime = endTime - startTime;
+	    document.getElementById("result").innerText = "It took " + diffTime + "(ms) to allocate 1000 1MB arrays. Average: " + (endTime - startTime)/1000 + "(ms)";
+    };
+
+</script>
+</html>
